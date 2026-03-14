@@ -1,9 +1,3 @@
-"""
-釜房ダム AI推論スクリプト
-DataAggregator.js から呼び出され、JSON入力を受け取り予測結果を返す。
-モデルは仙台観測所データで学習済みの kamafusa_rf_*.pkl を使用。
-"""
-
 import sys
 import json
 import os
@@ -11,6 +5,9 @@ import pickle
 import warnings
 import pandas as pd
 import numpy as np
+import gc
+
+# SHAPのインポート（エラー回避付き）
 try:
     import shap
     SHAP_AVAILABLE = True
@@ -18,36 +15,38 @@ except Exception as e:
     SHAP_AVAILABLE = False
     SHAP_ERROR = str(e)
 
+# 環境変数で分析（SHAP）の有効/無効を切り替え可能にする
+ENABLE_SHAP = os.environ.get('ENABLE_AI_REASONS', 'true').lower() == 'true'
+
 def get_reasons(model, df_input, feature_names):
-    if not SHAP_AVAILABLE:
-        return {"error": SHAP_ERROR}
+    if not (SHAP_AVAILABLE and ENABLE_SHAP):
+        return {"error": "SHAP disabled or not available"}
     
-    explainer = shap.TreeExplainer(model)
-    shap_vals = explainer.shap_values(df_input)
-    
-    if len(shap_vals.shape) == 2:
-        shap_vals = shap_vals[0]
-    elif len(shap_vals.shape) == 3:
-        shap_vals = shap_vals[0][0]
+    try:
+        explainer = shap.TreeExplainer(model)
+        shap_vals = explainer.shap_values(df_input)
         
-    contributions = list(zip(feature_names, shap_vals))
-    sorted_contributions = sorted(contributions, key=lambda x: x[1])
-    
-    neg_reasons = [{"feature": f, "impact": round(float(v), 2)} for f, v in sorted_contributions if v < 0]
-    pos_reasons = [{"feature": f, "impact": round(float(v), 2)} for f, v in sorted_contributions if v > 0]
-    
-    return {
-        "increase": sorted(pos_reasons, key=lambda x: x["impact"], reverse=True)[:2],
-        "decrease": sorted(neg_reasons, key=lambda x: x["impact"])[:2]
-    }
+        if len(shap_vals.shape) == 2:
+            shap_vals = shap_vals[0]
+        elif len(shap_vals.shape) == 3:
+            shap_vals = shap_vals[0][0]
+            
+        contributions = list(zip(feature_names, shap_vals))
+        sorted_contributions = sorted(contributions, key=lambda x: x[1])
+        
+        neg_reasons = [{"feature": f, "impact": round(float(v), 2)} for f, v in sorted_contributions if v < 0]
+        pos_reasons = [{"feature": f, "impact": round(float(v), 2)} for f, v in sorted_contributions if v > 0]
+        
+        return {
+            "increase": sorted(pos_reasons, key=lambda x: x["impact"], reverse=True)[:2],
+            "decrease": sorted(neg_reasons, key=lambda x: x["impact"])[:2]
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 def predict(features_dict):
     base_dir = os.path.dirname(__file__)
     horizons = ['7d', '28d', '60d', '90d']
-    model_paths = {h: os.path.join(base_dir, f'../models/kamafusa_rf_{h}.pkl') for h in horizons}
-    
-    if not all(os.path.exists(p) for p in model_paths.values()):
-        return {"error": "Kamafusa models not found. Run train_kamafusa_model.py first."}
     
     feature_names = [
         'StorageLevel', 'Inflow', 'Outflow', 'AvgTemp', 
@@ -57,25 +56,31 @@ def predict(features_dict):
         'Forecast_Precip_7d_sum', 'Forecast_Temp_7d_avg'
     ]
     
-    input_data = {}
-    for f in feature_names:
-        input_data[f] = [float(features_dict.get(f, 0.0))]
-        
+    input_data = {f: [float(features_dict.get(f, 0.0))] for f in feature_names}
     df = pd.DataFrame(input_data)
     results = {}
     
     try:
         for h in horizons:
-            with open(model_paths[h], 'rb') as f:
-                rf = pickle.load(f)
-                preds = np.array([tree.predict(df)[0] for tree in rf.estimators_])
+            model_path = os.path.join(base_dir, f'../models/kamafusa_rf_{h}.pkl')
+            if not os.path.exists(model_path):
+                continue
+                
+            with open(model_path, 'rb') as f:
+                model = pickle.load(f)
+                preds = np.array([tree.predict(df.values)[0] for tree in model.estimators_])
                 results[h] = {
                     'mean': round(float(np.mean(preds)), 2),
                     'std': round(float(np.std(preds)), 2),
                     'min': round(float(np.min(preds)), 2),
                     'max': round(float(np.max(preds)), 2),
-                    'reasons': get_reasons(rf, df, feature_names) if SHAP_AVAILABLE else {"error": SHAP_ERROR}
+                    'reasons': get_reasons(model, df, feature_names) if ENABLE_SHAP else {"status": "skipped"}
                 }
+                
+                # 明示的な解放
+                del model
+                del preds
+                gc.collect()
                 
         return {"success": True, "predictions": results}
         
@@ -84,19 +89,14 @@ def predict(features_dict):
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
-    input_str = ""
-    if len(sys.argv) > 1:
-        input_str = sys.argv[1]
-    else:
-        input_str = sys.stdin.read().strip()
-        
+    input_str = sys.stdin.read().strip() if not sys.argv[1:] else sys.argv[1]
+    
     if not input_str:
-        print(json.dumps({"error": "No input JSON provided via args or stdin"}))
+        print(json.dumps({"error": "No input JSON provided"}))
         sys.exit(1)
         
     try:
         input_json = json.loads(input_str)
-        result = predict(input_json)
-        print(json.dumps(result))
+        print(json.dumps(predict(input_json)))
     except Exception as e:
-        print(json.dumps({"error": f"Invalid JSON input: {str(e)}"}))
+        print(json.dumps({"error": f"Invalid input: {str(e)}"}))

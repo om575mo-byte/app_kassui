@@ -38,5 +38,5 @@ EXPOSE 3001
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
     CMD node -e "fetch('http://localhost:3001/api/health').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"
 
-# 起動コマンド
-CMD ["node", "server/index.js"]
+# 起動コマンド (メモリ制限を追加)
+CMD ["node", "--max-old-space-size=256", "server/index.js"]
