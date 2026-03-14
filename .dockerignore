@@ -13,7 +13,6 @@ tmp_*
 *.html
 debug_*
 dum_data
-docs
 scripts/tmp_*
 scripts/test*
 scripts/check*
