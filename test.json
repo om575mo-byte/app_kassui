@@ -1,0 +1,12 @@
+{
+    "StorageLevel": 230,
+    "Inflow": 5,
+    "Outflow": 5,
+    "AvgTemp": 4,
+    "Precipitation": 0,
+    "Snowfall": 0,
+    "Precip_7d_sum": 20,
+    "Precip_30d_sum": 80,
+    "Temp_7d_avg": 4,
+    "Snowfall_30d_sum": 50
+}

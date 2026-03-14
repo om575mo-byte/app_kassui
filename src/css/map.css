@@ -1,0 +1,305 @@
+/* ===========================
+   Map Styles
+   =========================== */
+#map-container {
+    flex: 1;
+    position: relative;
+    min-width: 0;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+    background: var(--bg-primary) !important;
+    font-family: var(--font-sans) !important;
+}
+
+.leaflet-control-zoom {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-sm) !important;
+    overflow: hidden;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.leaflet-control-zoom a {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 16px !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: var(--bg-hover) !important;
+}
+
+.leaflet-control-attribution {
+    background: rgba(10, 15, 26, 0.7) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.65rem !important;
+    padding: 2px 6px !important;
+}
+
+.leaflet-control-attribution a {
+    color: var(--accent-cyan) !important;
+}
+
+/* ===========================
+   Map Legend
+   =========================== */
+.map-overlay {
+    position: absolute;
+    z-index: 800;
+}
+
+#map-legend {
+    bottom: 24px;
+    left: 12px;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-md);
+    min-width: 160px;
+}
+
+#map-legend h3 {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-sm);
+}
+
+.legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px currentColor;
+}
+
+/* ===========================
+   Dam Markers (Custom)
+   =========================== */
+
+/* Leaflet divIcon のデフォルトスタイルを除去 */
+.leaflet-div-icon {
+    background: none !important;
+    border: none !important;
+}
+
+.dam-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dam-marker:hover {
+    z-index: 900 !important;
+}
+
+.dam-marker:hover .dam-marker-dot {
+    transform: scale(1.2);
+}
+
+.dam-marker-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px currentColor, 0 2px 6px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+}
+
+.dam-marker-dot.level-critical {
+    animation: criticalPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes criticalPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px var(--level-critical), 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 22px var(--level-critical), 0 0 40px rgba(239, 68, 68, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.dam-marker-label {
+    order: -1;
+    white-space: nowrap;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 2px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    margin-bottom: 2px;
+}
+
+/* ===========================
+   Popup Styles
+   =========================== */
+.leaflet-popup-content-wrapper {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+    padding: 0 !important;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: none !important;
+}
+
+.popup-content {
+    padding: var(--space-md);
+    min-width: 220px;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.popup-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.popup-level-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+}
+
+.popup-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.popup-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.popup-stat-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.popup-bar {
+    margin-top: var(--space-sm);
+    height: 6px;
+    background: rgba(148, 163, 184, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.popup-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width var(--transition-base);
+}
+
+.popup-footer {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-river {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.popup-link {
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.popup-link:hover {
+    color: var(--accent-blue);
+}
+
+/* ===========================
+   Responsive Map
+   =========================== */
+@media (max-width: 768px) {
+    #map-legend {
+        bottom: 8px;
+        left: 8px;
+        padding: var(--space-sm);
+        min-width: 130px;
+    }
+
+    #map-legend h3 {
+        font-size: 0.7rem;
+    }
+
+    .legend-item {
+        font-size: 0.7rem;
+    }
+
+    .dam-marker-label {
+        font-size: 0.6rem;
+    }
+}

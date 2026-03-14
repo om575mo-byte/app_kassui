@@ -1,0 +1,5 @@
+降水量：https://www.data.jma.go.jp/stats/etrn/view/daily_h1.php?prec_no=34&block_no=00&year=2026&month=02&day=&view=p1
+平均気温：https://www.data.jma.go.jp/stats/etrn/view/daily_h1.php?prec_no=34&block_no=00&year=2026&month=02&day=&view=p2
+最高気温：https://www.data.jma.go.jp/stats/etrn/view/daily_h1.php?prec_no=34&block_no=00&year=2026&month=02&day=&view=p3
+最低気温：https://www.data.jma.go.jp/stats/etrn/view/daily_h1.php?prec_no=34&block_no=00&year=2026&month=02&day=&view=p4
+最深積雪：https://www.data.jma.go.jp/stats/etrn/view/daily_h1.php?prec_no=34&block_no=00&year=2026&month=02&day=&view=p9

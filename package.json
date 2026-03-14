@@ -1,0 +1,33 @@
+{
+    "name": "app-kassui",
+    "version": "1.0.0",
+    "description": "宮城県渇水状況可視化Webアプリ",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "server": "node server/index.js",
+        "dev:all": "concurrently \"npm run server\" \"npm run dev\""
+    },
+    "dependencies": {
+        "cheerio": "^1.2.0",
+        "cors": "^2.8.5",
+        "dotenv": "^17.3.1",
+        "express": "^4.18.2",
+        "express-rate-limit": "^8.3.1",
+        "helmet": "^8.1.0",
+        "node-cache": "^5.1.2",
+        "node-fetch": "^3.3.2",
+        "osmtogeojson": "^3.0.0-beta.5"
+    },
+    "devDependencies": {
+        "@turf/simplify": "^7.3.4",
+        "concurrently": "^8.2.2",
+        "fast-xml-parser": "^5.4.2",
+        "iconv-lite": "^0.7.2",
+        "shapefile": "^0.6.6",
+        "unzipper": "^0.12.3",
+        "vite": "^5.4.0"
+    }
+}

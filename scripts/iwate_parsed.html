@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>豌苓ｱ｡蠎��ｽ憺℃蜴ｻ縺ｮ豌苓ｱ｡繝�繝ｼ繧ｿ讀懃ｴ｢</title>
+<meta name="Author" content="豌苓ｱ｡蠎� Japan Meteorological Agency" />
+<meta name="keywords" content="豌苓ｱ｡蠎� Japan Meteorological Agency" />
+<meta name="description" content="豌苓ｱ｡蠎��ｽ憺℃蜴ｻ縺ｮ豌苓ｱ｡繝�繝ｼ繧ｿ讀懃ｴ｢" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" type="text/css" href="/com/css/define.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../css/default.css" media="all" />
+<script type="text/javascript" src="/com/js/jquery.js"></script>
+<script type="text/javascript">
+  function viewPoint(as, bk_no, ch, ch_kn, lat_d, lat_m, lon_d, lon_m, height, f_pre, f_wsp, f_tem, f_sun, f_snc, f_hum, ed_y, ed_m, ed_d, bikou1, bikou2, bikou3, bikou4, bikou5){
+    if(bk_no == 47646 || bk_no == 47690 || bk_no == 47945){
+      ch = ch + "窶ｻ";
+      ch_kn = ch_kn + "窶ｻ";
+    }
+    if(bk_no == 47401) {ch_kn = '繝ｯ繝�繧ｫ繝翫う';}
+    if(bk_no == 47412) {ch_kn = '繧ｵ繝�繝昴Ο';}
+    if(bk_no == 47421) {ch_kn = '繧ｹ繝�繝�';}
+    if(bk_no == 47433) {ch_kn = '繧ｯ繝�繝√Ε繝ｳ';}
+    if(bk_no == 47520) {ch_kn = '繧ｷ繝ｳ繧ｸ繝ｧ繧ｦ';}
+    if(bk_no == 47648) {ch_kn = '繝√Ι繧ｦ繧ｷ';}
+    if(bk_no == 47662) {ch_kn = '繝医え繧ｭ繝ｧ繧ｦ';}
+    if(bk_no == 47678) {ch_kn = '繝上メ繧ｸ繝ｧ繧ｦ繧ｸ繝�';}
+    if(bk_no == 47684) {ch_kn = '繝ｨ繝�繧ｫ繧､繝�';}
+    if(bk_no == 47746) {ch_kn = '繝医ャ繝医Μ';}
+    if(bk_no == 47759) {ch_kn = '繧ｭ繝ｧ繧ｦ繝�';}
+    if(bk_no == 47829) {ch_kn = '繝溘Ζ繧ｳ繝弱ず繝ｧ繧ｦ';}
+    document.all('point_ch').firstChild.nodeValue=ch;
+    document.all('point_ch_kn').firstChild.nodeValue=ch_kn;
+    if((lat_d-0) < 0){
+      document.all('point_lat').firstChild.nodeValue='蜊礼ｷｯ'+Math.abs(lat_d-0)+'蠎ｦ'+lat_m+'蛻�';
+    }else{
+      document.all('point_lat').firstChild.nodeValue='蛹礼ｷｯ'+lat_d+'蠎ｦ'+lat_m+'蛻�';
+    }
+    document.all('point_lon').firstChild.nodeValue='譚ｱ邨�'+(lon_d-0)+'蠎ｦ'+lon_m+'蛻�';
+
+    if(height == 0){
+      document.all('point_height').firstChild.nodeValue='0�ｽ�';
+    }else{
+      document.all('point_height').firstChild.nodeValue=height+'m縲';
+    }
+
+    if(as == 'a'){
+      document.all('point_style').firstChild.nodeValue='繧｢繝｡繝繧ｹ';
+    }
+    if(as == 's'){
+      document.all('point_style').firstChild.nodeValue='豌苓ｱ｡蜿ｰ縲∵ｸｬ蛟呎園縺ｪ縺ｩ';
+    }
+    if(f_pre == '1' || as == 's') document.all('ob_rain').src = "../../data/image/obs/ob_rain.gif"
+    if(f_wsp == '1' || as == 's') document.all('ob_wind').src = "../../data/image/obs/ob_wind.gif"
+    if(f_tem == '1' || as == 's') document.all('ob_tmeter').src = "../../data/image/obs/ob_tmeter.gif"
+    if(f_sun == '1' || f_sun == '2' || f_sun == '3' || as == 's') document.all('ob_sun').src = "../../data/image/obs/ob_sun.gif"
+    if(f_snc == '1') document.all('ob_snow').src = "../../data/image/obs/ob_snow.gif"
+    if(f_hum == '1' || as == 's') document.all('ob_hum').src = "../../data/image/obs/ob_hum.gif"
+    //if(f_hum == '1' || as == 's') document.all('ob_hum').src = "../../image/obs/ob_hum.gif"
+    if(ed_y != '9999'){
+      document.all('point_ed_dt').firstChild.nodeValue=ed_y+'蟷ｴ'+ed_m+'譛�'+ed_d+'譌･縺ｾ縺ｧ隕ｳ貂ｬ';
+    }
+    if(bk_no == 47646 || bk_no == 47690 || bk_no == 47945){
+      document.all('notation_b').firstChild.nodeValue='窶ｻ蝨ｰ轤ｹ縲√き繝翫�ｮ�ｼ� �ｼ牙��縺ｯ豌苓ｱ｡蜿ｰ繝ｻ貂ｬ蛟呎園縺ｪ縺ｩ縺ｮ蜷咲ｧｰ縺ｧ縺吶�';
+    }else{
+      document.all('notation_b').firstChild.nodeValue='縲';
+    }
+
+    if(bikou1 != ""){
+      document.all('point_bikou1').firstChild.nodeValue=bikou1;
+    }else{
+      document.all('point_bikou1').firstChild.nodeValue='縲';
+    }
+    if(bikou2 != ""){
+      document.all('point_bikou2').firstChild.nodeValue=bikou2;
+    }else{
+      document.all('point_bikou2').firstChild.nodeValue='縲';
+    }
+    if(bikou3 != ""){
+      document.all('point_bikou3').firstChild.nodeValue=bikou3;
+    }else{
+      document.all('point_bikou3').firstChild.nodeValue='縲';
+    }
+    if(bikou4 != ""){
+      document.all('point_bikou4').firstChild.nodeValue=bikou4;
+    }else{
+      document.all('point_bikou4').firstChild.nodeValue='縲';
+    }
+    if(bikou5 != ""){
+      document.all('point_bikou5').firstChild.nodeValue=bikou5;
+    }else{
+      document.all('point_bikou5').firstChild.nodeValue='縲';
+    }
+  }
+  function initPoint(){
+    document.all('point_ch').firstChild.nodeValue="縲";
+    document.all('point_ch_kn').firstChild.nodeValue="縲";
+    document.all('point_lat').firstChild.nodeValue="縲";
+    document.all('point_lon').firstChild.nodeValue="縲";
+    document.all('point_height').firstChild.nodeValue="縲";
+    document.all('point_style').firstChild.nodeValue="縲";
+    document.all('ob_rain').src = "../../data/image/obs/ob_null.gif"
+    document.all('ob_wind').src = "../../data/image/obs/ob_null.gif"
+    document.all('ob_tmeter').src = "../../data/image/obs/ob_null.gif"
+    document.all('ob_sun').src = "../../data/image/obs/ob_null.gif"
+    document.all('ob_snow').src = "../../data/image/obs/ob_null.gif"
+    document.all('ob_hum').src = "../../data/image/obs/ob_null.gif"
+    document.all('point_ed_dt').firstChild.nodeValue="縲";
+    document.all('notation_b').firstChild.nodeValue="縲";
+    document.all('point_bikou1').firstChild.nodeValue="縲";
+    document.all('point_bikou2').firstChild.nodeValue="縲";
+    document.all('point_bikou3').firstChild.nodeValue="縲";
+    document.all('point_bikou4').firstChild.nodeValue="縲";
+    document.all('point_bikou5').firstChild.nodeValue="縲";
+  }
+</script>
+<style type="text/css" media="all"><!-- @import url(/com/default.css); --></style>
+<style type="text/css">
+   td{ height:12px }
+</style>
+</head>
+
+<body>
+<noscript><div>縺吶∋縺ｦ縺ｮ讖溯�ｽ繧偵＃蛻ｩ逕ｨ縺�縺溘□縺上↓縺ｯJavascript繧呈怏蜉ｹ縺ｫ縺励※縺上□縺輔＞縲�</div></noscript>
+<!--header start -->
+<div id="header_area">
+  <div id="nheader">
+    <div id="logo"><a href="//www.jma.go.jp/jma/index.html"><img src="/jma/com/images/logo.gif" alt="豌苓ｱ｡蠎�" width="120" height="67" /></a></div>
+    <div id="header2_right">
+      <div id="header2_link">
+        <ul>
+          <li xml:lang="en" lang="en"><a href="//www.jma.go.jp/jma/kokusai/multi.html">Other Languages</a></li>
+        </ul>
+      </div>
+      <div id="header2_link">
+        <ul>
+          <li xml:lang="en" lang="en"><a href="//www.jma.go.jp/jma/indexe.html">ENGLISH</a></li>
+        </ul>
+      </div>
+<!-- search -->
+      <div id="gsearch">
+        <form id="cse-search-box" action="//google.com/cse">
+          <input type="hidden" name="cx" value="009950868052057056798:0yrbmp7chwi">
+          <input type="hidden" name="ie" value="UTF-8">
+          <input type="text" name="q">
+          <input type="image" name="sa" src="/jma/com/images/btn_search6.png" alt="讀懃ｴ｢">
+        </form>
+        <script type="text/javascript" src="//www.google.com/cse/brand?form=cse-search-box&lang=ja"></script>
+      </div>
+<!-- search end-->
+    </div>
+    <ul id="gnavi">
+      <li><a href="//www.jma.go.jp/">繝帙�ｼ繝�</a></li>
+      <li><a href="//www.jma.go.jp/jma/menu/menuflash.html">髦ｲ轣ｽ諠�蝣ｱ</a></li>
+      <li><a href="//www.jma.go.jp/jma/menu/menureport.html" class="on">蜷�遞ｮ繝�繝ｼ繧ｿ繝ｻ雉�譁�</a></li>
+      <li><a href="//www.jma.go.jp/jma/menu/areas.html">蝨ｰ蝓溘�ｮ諠�蝣ｱ</a></li>
+      <li><a href="//www.jma.go.jp/jma/menu/menuknowledge.html">遏･隴倥�ｻ隗｣隱ｬ</a></li>
+      <li><a href="//www.jma.go.jp/jma/menu/menuappli.html">蜷�遞ｮ逕ｳ隲九�ｻ縺疲｡亥��</a></li>
+    </ul>
+  </div>
+</div>
+<!--header end -->
+
+<div id="contents_area2">
+  <div id="ncontents2">
+<!-- pankuzu menu -->
+  <ul class="breadcrumb2">
+  <li><a href="//www.jma.go.jp/">繝帙�ｼ繝�</a>&nbsp;&gt;&nbsp;</li>
+  <li><a href="//www.jma.go.jp/jma/menu/menureport.html">蜷�遞ｮ繝�繝ｼ繧ｿ繝ｻ雉�譁�</a>&nbsp;&gt;&nbsp;</li>
+  <li><a href="../index.php?prec_no=33&block_no=&year=&month=&day=&view=">驕主悉縺ｮ豌苓ｱ｡繝�繝ｼ繧ｿ讀懃ｴ｢</a>&nbsp;&gt;&nbsp;</li>  <li><a href="prefecture00.php?prec_no=33&block_no=&year=&month=&day=&view=">驛ｽ蠎懃恁繝ｻ蝨ｰ譁ｹ縺ｮ驕ｸ謚�</a>&nbsp;&gt;&nbsp;</li>
+  <li>蝨ｰ轤ｹ縺ｮ驕ｸ謚�</li>
+  </ul>
+<!-- //pankuzu menu -->
+
+<div id="main">
+<!-- contents -->
+
+<!-- contents -->
+<h1>蝨ｰ轤ｹ縺ｮ驕ｸ謚�</h1>
+
+<div>
+<table>
+<tr><td style="vertical-align:top">
+<img src="../../data/image/map/map33.png" alt="蝨ｰ轤ｹ驕ｸ謚樒畑蟯ｩ謇狗恁蝨ｰ蝗ｳ" usemap="#point" border="0"></td><td style="vertical-align:top">
+<table>
+<!--2013.3.23蜈ｨ隗偵′縺ｪ縺�縺ｨmacintosh縺ｮsafari縺ｧ陦碁俣縺悟ｰ上＆縺上↑繧九�ｮ縺ｧ縲∝ｿ�縺壼�ｨ隗呈枚蟄励°蜈ｨ隗偵せ繝壹�ｼ繧ｹ繧貞�･繧後ｋ縺薙→縲�-->
+<tr><td class="nwtop" colspan="2" style="font-weight:bold; text-align:left">縲縲縲縲蟯ｩ謇狗恁</td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">蝨ｰ轤ｹ&nbsp;&nbsp;</td><td class="nwtop"><div id="point_ch">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">繧ｫ繝�&nbsp;&nbsp;</td><td class="nwtop"><div id="point_ch_kn">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">邱ｯ蠎ｦ&nbsp;&nbsp;</td><td class="nwtop"><div id="point_lat">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">邨悟ｺｦ&nbsp;&nbsp;</td><td class="nwtop"><div id="point_lon">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">讓咎ｫ�&nbsp;&nbsp;</td><td class="nwtop"><div id="point_height">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">蛹ｺ蛻�&nbsp;&nbsp;</td><td class="nwtop"><div id="point_style">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">隕ｳ貂ｬ&nbsp;&nbsp;</td>
+<td class="nwtop">
+<img src="../../data/image/obs/ob_null.gif" id="ob_rain" alt="">
+<img src="../../data/image/obs/ob_null.gif" id="ob_tmeter" alt="">
+<img src="../../data/image/obs/ob_null.gif" id="ob_hum" alt="">
+<img src="../../data/image/obs/ob_null.gif" id="ob_wind" alt="">
+<img src="../../data/image/obs/ob_null.gif" id="ob_sun" alt="">
+<img src="../../data/image/obs/ob_null.gif" id="ob_snow" alt="">
+</td></tr>
+<!--2013.3.23蜈ｨ隗偵′縺ｪ縺�縺ｨmacintosh縺ｮsafari縺ｧ陦碁俣縺悟ｰ上＆縺上↑繧九�ｮ縺ｧ縲∝ｿ�縺壼�ｨ隗呈枚蟄励°蜈ｨ隗偵せ繝壹�ｼ繧ｹ繧貞�･繧後ｋ縺薙→縲�-->
+<tr><td colspan='2'><div id="point_ed_dt">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">縲</td><td class="nwtop"><div id="notation_b">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">蛯呵�</td><td class="nwtop"><div id="point_bikou1">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">縲</td><td class="nwtop"><div id="point_bikou2">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">縲</td><td class="nwtop"><div id="point_bikou3">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">縲</td><td class="nwtop"><div id="point_bikou4">縲</div></td></tr>
+<tr><td class="nwtop" style="font-weight:bold;width:3em">縲</td><td class="nwtop"><div id="point_bikou5">縲</div></td></tr>
+</table>
+</td></tr>
+</table>
+</div>
+</div>
+<map name="point"><area shape="rect" alt="遞ｮ蟶�" coords="265,43,294,55" href="../index.php?prec_no=33&block_no=0205&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0205','遞ｮ蟶�','繧ｿ繝阪う繝�','40','24.2','141','42.0','70','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="遞ｮ蟶�" coords="257,46,264,53" href="../index.php?prec_no=33&block_no=0205&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0205','遞ｮ蟶�','繧ｿ繝阪う繝�','40','24.2','141','42.0','70','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="霆ｽ邀ｳ" coords="219,64,248,76" href="../index.php?prec_no=33&block_no=0206&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0206','霆ｽ邀ｳ','繧ｫ繝ｫ繝槭う','40','19.5','141','28.0','148','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="霆ｽ邀ｳ" coords="210,66,217,73" href="../index.php?prec_no=33&block_no=0206&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0206','霆ｽ邀ｳ','繧ｫ繝ｫ繝槭う','40','19.5','141','28.0','148','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="莠梧虻" coords="156,82,185,94" href="../index.php?prec_no=33&block_no=0207&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0207','莠梧虻','繝九ヮ繝�','40','17.9','141','17.9','87','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="莠梧虻" coords="177,72,184,79" href="../index.php?prec_no=33&block_no=0207&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0207','莠梧虻','繝九ヮ繝�','40','17.9','141','17.9','87','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="謚倡穐蟯ｳ" coords="200,79,244,91" href="../index.php?prec_no=33&block_no=0208&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0208','謚倡穐蟯ｳ','繧ｪ繝ｪ繝�繝｡繝繧ｱ','40','15.8','141','22.5','844','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="謚倡穐蟯ｳ" coords="192,81,199,88" href="../index.php?prec_no=33&block_no=0208&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0208','謚倡穐蟯ｳ','繧ｪ繝ｪ繝�繝｡繝繧ｱ','40','15.8','141','22.5','844','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荵�諷�" coords="276,103,305,115" href="../index.php?prec_no=33&block_no=0209&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0209','荵�諷�','繧ｯ繧ｸ','40','10.1','141','44.9','13','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荵�諷�" coords="267,105,274,112" href="../index.php?prec_no=33&block_no=0209&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0209','荵�諷�','繧ｯ繧ｸ','40','10.1','141','44.9','13','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="隘ｿ蟯ｳ" coords="152,111,183,123" href="../index.php?prec_no=33&block_no=0210&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0210','隘ｿ蟯ｳ','繝九す繝繧ｱ','40','05.0','141','10.4','1008','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="隘ｿ蟯ｳ" coords="152,126,159,133" href="../index.php?prec_no=33&block_no=0210&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0210','隘ｿ蟯ｳ','繝九す繝繧ｱ','40','05.0','141','10.4','1008','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闡帛ｷｻ" coords="201,124,230,136" href="../index.php?prec_no=33&block_no=0211&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0211','闡帛ｷｻ','繧ｯ繧ｺ繝槭く','40','02.4','141','27.4','418','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闡帛ｷｻ" coords="208,137,215,144" href="../index.php?prec_no=33&block_no=0211&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0211','闡帛ｷｻ','繧ｯ繧ｺ繝槭く','40','02.4','141','27.4','418','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="陲門ｱｱ" coords="228,145,259,157" href="../index.php?prec_no=33&block_no=0212&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0212','陲門ｱｱ','繧ｽ繝�繝､繝�','40','01.5','141','31.5','1144','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="陲門ｱｱ" coords="222,141,229,148" href="../index.php?prec_no=33&block_no=0212&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0212','陲門ｱｱ','繧ｽ繝�繝､繝�','40','01.5','141','31.5','1144','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闌ｶ閾ｼ蟯ｳ" coords="52,158,96,170" href="../index.php?prec_no=33&block_no=0213&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0213','闌ｶ閾ｼ蟯ｳ','繝√Ε繧ｦ繧ｹ繝繧ｱ','39','56.7','140','54.3','1443','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闌ｶ閾ｼ蟯ｳ" coords="98,161,105,168" href="../index.php?prec_no=33&block_no=0213&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0213','闌ｶ閾ｼ蟯ｳ','繝√Ε繧ｦ繧ｹ繝繧ｱ','39','56.7','140','54.3','1443','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ謇区收蟆ｾ" coords="90,143,143,155" href="../index.php?prec_no=33&block_no=0214&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0214','蟯ｩ謇区收蟆ｾ','繧､繝ｯ繝�繝槭ヤ繧ｪ','39','57.1','141','03.9','275','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ謇区收蟆ｾ" coords="130,159,137,166" href="../index.php?prec_no=33&block_no=0214&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0214','蟯ｩ謇区收蟆ｾ','繧､繝ｯ繝�繝槭ヤ繧ｪ','39','57.1','141','03.9','275','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ謇句ｱｱ" coords="95,174,139,186" href="../index.php?prec_no=33&block_no=0215&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0215','蟯ｩ謇句ｱｱ','繧､繝ｯ繝�繝､繝�','39','50.4','140','57.0','1403','1','0','0','0','0','0','2005','10','21','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ謇句ｱｱ" coords="107,187,114,194" href="../index.php?prec_no=33&block_no=0215&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0215','蟯ｩ謇句ｱｱ','繧､繝ｯ繝�繝､繝�','39','50.4','140','57.0','1403','1','0','0','0','0','0','2005','10','21','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ豢�" coords="189,179,220,191" href="../index.php?prec_no=33&block_no=0216&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0216','蟯ｩ豢�','繧ｬ繝ｳ繝峨え','39','49.5','141','22.5','678','1','0','0','0','0','0','2000','09','30','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ豢�" coords="192,191,199,198" href="../index.php?prec_no=33&block_no=0216&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0216','蟯ｩ豢�','繧ｬ繝ｳ繝峨え','39','49.5','141','22.5','678','1','0','0','0','0','0','2000','09','30','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ譽ｮ螻ｱ" coords="229,189,273,201" href="../index.php?prec_no=33&block_no=0217&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0217','螟ｧ譽ｮ螻ｱ','繧ｪ繧ｪ繝｢繝ｪ繝､繝�','39','49.1','141','31.2','1073','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ譽ｮ螻ｱ" coords="221,192,228,199" href="../index.php?prec_no=33&block_no=0217&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0217','螟ｧ譽ｮ螻ｱ','繧ｪ繧ｪ繝｢繝ｪ繝､繝�','39','49.1','141','31.2','1073','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ豕�" coords="272,195,301,207" href="../index.php?prec_no=33&block_no=0218&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0218','蟯ｩ豕�','繧､繝ｯ繧､繧ｺ繝�','39','50.8','141','47.7','105','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｩ豕�" coords="276,185,283,192" href="../index.php?prec_no=33&block_no=0218&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0218','蟯ｩ豕�','繧､繝ｯ繧､繧ｺ繝�','39','50.8','141','47.7','105','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="鬧偵こ蟯ｳ" coords="59,223,100,235" href="../index.php?prec_no=33&block_no=0219&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0219','鬧偵こ蟯ｳ','繧ｳ繝槭ぎ繧ｿ繧ｱ','39','44.0','140','47.5','1003','1','0','0','0','0','0','2005','04','20','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="鬧偵こ蟯ｳ" coords="75,214,82,221" href="../index.php?prec_no=33&block_no=0219&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0219','鬧偵こ蟯ｳ','繧ｳ繝槭ぎ繧ｿ繧ｱ','39','44.0','140','47.5','1003','1','0','0','0','0','0','2005','04','20','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螳ｳ鮃ｹ譽ｮ" coords="246,217,290,229" href="../index.php?prec_no=33&block_no=0220&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0220','螳ｳ鮃ｹ譽ｮ','繧ｬ繧､繧ｿ繧ｫ繝｢繝ｪ','39','42.5','141','36.2','1278','1','0','0','0','0','0','2003','10','21','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螳ｳ鮃ｹ譽ｮ" coords="238,220,245,227" href="../index.php?prec_no=33&block_no=0220&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0220','螳ｳ鮃ｹ譽ｮ','繧ｬ繧､繧ｿ繧ｫ繝｢繝ｪ','39','42.5','141','36.2','1278','1','0','0','0','0','0','2003','10','21','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髮ｫ遏ｳ" coords="102,231,131,243" href="../index.php?prec_no=33&block_no=0221&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0221','髮ｫ遏ｳ','繧ｷ繧ｺ繧ｯ繧､繧ｷ','39','41.8','140','58.5','195','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髮ｫ遏ｳ" coords="112,223,119,230" href="../index.php?prec_no=33&block_no=0221&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0221','髮ｫ遏ｳ','繧ｷ繧ｺ繧ｯ繧､繧ｷ','39','41.8','140','58.5','195','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="逶帛ｲ｡" coords="141,232,170,244" href="../index.php?prec_no=33&block_no=47584&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('s','47584','逶帛ｲ｡','繝｢繝ｪ繧ｪ繧ｫ','39','41.9','141','09.9','155.2','1','1','1','1','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="逶帛ｲ｡" coords="148,220,159,231" href="../index.php?prec_no=33&block_no=47584&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('s','47584','逶帛ｲ｡','繝｢繝ｪ繧ｪ繧ｫ','39','41.9','141','09.9','155.2','1','1','1','1','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螳ｮ蜿､" coords="320,232,349,244" href="../index.php?prec_no=33&block_no=47585&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('s','47585','螳ｮ蜿､','繝溘Ζ繧ｳ','39','38.8','141','57.9','42.5','1','1','1','1','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螳ｮ蜿､" coords="308,233,319,244" href="../index.php?prec_no=33&block_no=47585&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('s','47585','螳ｮ蜿､','繝溘Ζ繧ｳ','39','38.8','141','57.9','42.5','1','1','1','1','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="阮ｬ蟶ｫ蟯ｳ" coords="224,262,268,274" href="../index.php?prec_no=33&block_no=0224&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0224','阮ｬ蟶ｫ蟯ｳ','繝､繧ｯ繧ｷ繝繧ｱ','39','31.7','141','29.8','1604','1','0','0','0','0','0','2005','10','20','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="阮ｬ蟶ｫ蟯ｳ" coords="216,265,223,272" href="../index.php?prec_no=33&block_no=0224&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0224','阮ｬ蟶ｫ蟯ｳ','繝､繧ｯ繧ｷ繝繧ｱ','39','31.7','141','29.8','1604','1','0','0','0','0','0','2005','10','20','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="鮟呈｣ｮ螻ｱ" coords="59,285,103,297" href="../index.php?prec_no=33&block_no=0225&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0225','鮟呈｣ｮ螻ｱ','繧ｯ繝ｭ繝｢繝ｪ繝､繝�','39','29.7','140','47.5','644','1','0','0','0','0','0','1993','08','01','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="鮟呈｣ｮ螻ｱ" coords="75,273,82,280" href="../index.php?prec_no=33&block_no=0225&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0225','鮟呈｣ｮ螻ｱ','繧ｯ繝ｭ繝｢繝ｪ繝､繝�','39','29.7','140','47.5','644','1','0','0','0','0','0','1993','08','01','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="雎頑ｲ｢" coords="119,274,148,286" href="../index.php?prec_no=33&block_no=0226&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0226','雎頑ｲ｢','繝医Κ繧ｵ繝ｯ','39','28.8','140','58.1','300','1','0','0','0','0','0','9999','99','99','1983蟷ｴ11譛�15譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪碁ｧ帝�ｭ螻ｱ縲�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="雎頑ｲ｢" coords="111,277,118,284" href="../index.php?prec_no=33&block_no=0226&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0226','雎頑ｲ｢','繝医Κ繧ｵ繝ｯ','39','28.8','140','58.1','300','1','0','0','0','0','0','9999','99','99','1983蟷ｴ11譛�15譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪碁ｧ帝�ｭ螻ｱ縲�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闃ｱ蟾ｻ" coords="134,298,163,310" href="../index.php?prec_no=33&block_no=0227&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0227','闃ｱ蟾ｻ','繝上リ繝槭く','39','25.7','141','08.1','90','1','1','1','0','1','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闃ｱ蟾ｻ" coords="144,290,151,297" href="../index.php?prec_no=33&block_no=0227&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0227','闃ｱ蟾ｻ','繝上リ繝槭く','39','25.7','141','08.1','90','1','1','1','0','1','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ霑ｫ" coords="183,277,212,289" href="../index.php?prec_no=33&block_no=0228&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0228','螟ｧ霑ｫ','繧ｪ繧ｪ繝上し繝�','39','28.2','141','16.7','150','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ霑ｫ" coords="173,279,180,286" href="../index.php?prec_no=33&block_no=0228&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0228','螟ｧ霑ｫ','繧ｪ繧ｪ繝上し繝�','39','28.2','141','16.7','150','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="貉ｯ逕ｰ" coords="80,316,109,328" href="../index.php?prec_no=33&block_no=0229&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0229','貉ｯ逕ｰ','繝ｦ繝','39','18.6','140','46.6','250','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="貉ｯ逕ｰ" coords="72,319,79,326" href="../index.php?prec_no=33&block_no=0229&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0229','貉ｯ逕ｰ','繝ｦ繝','39','18.6','140','46.6','250','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蛹嶺ｸ�" coords="147,322,176,334" href="../index.php?prec_no=33&block_no=0230&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0230','蛹嶺ｸ�','繧ｭ繧ｿ繧ｫ繝�','39','17.3','141','06.6','61','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蛹嶺ｸ�" coords="139,325,146,332" href="../index.php?prec_no=33&block_no=0230&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0230','蛹嶺ｸ�','繧ｭ繧ｿ繧ｫ繝�','39','17.3','141','06.6','61','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="驕�驥�" coords="233,310,262,322" href="../index.php?prec_no=33&block_no=0231&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0231','驕�驥�','繝医が繝�','39','20.3','141','32.6','275','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="驕�驥�" coords="226,312,233,319" href="../index.php?prec_no=33&block_no=0231&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0231','驕�驥�','繝医が繝�','39','20.3','141','32.6','275','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="莠碑痩螻ｱ" coords="258,350,302,362" href="../index.php?prec_no=33&block_no=0232&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0232','莠碑痩螻ｱ','繧ｴ繝ｨ繧ｦ繧ｵ繝ｳ','39','10.6','141','39.7','560','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="莠碑痩螻ｱ" coords="249,353,256,360" href="../index.php?prec_no=33&block_no=0232&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0232','莠碑痩螻ｱ','繧ｴ繝ｨ繧ｦ繧ｵ繝ｳ','39','10.6','141','39.7','560','1','0','0','0','0','0','2009','11','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="驥懃浹" coords="301,326,330,338" href="../index.php?prec_no=33&block_no=0233&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0233','驥懃浹','繧ｫ繝槭う繧ｷ','39','16.2','141','52.7','5','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="驥懃浹" coords="293,329,300,336" href="../index.php?prec_no=33&block_no=0233&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0233','驥懃浹','繧ｫ繝槭う繧ｷ','39','16.2','141','52.7','5','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｳ螻ｱ" coords="61,362,92,374" href="../index.php?prec_no=33&block_no=0234&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0234','蟯ｳ螻ｱ','繝繧ｱ繝､繝�','39','08.0','140','52.6','973','1','0','0','0','0','0','2005','10','19','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟯ｳ螻ｱ" coords="92,364,99,371" href="../index.php?prec_no=33&block_no=0234&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0234','蟯ｳ螻ｱ','繝繧ｱ繝､繝�','39','08.0','140','52.6','973','1','0','0','0','0','0','2005','10','19','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闍･譟ｳ" coords="138,365,167,377" href="../index.php?prec_no=33&block_no=0235&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0235','闍･譟ｳ','繝ｯ繧ｫ繝､繝翫ぐ','39','08.4','141','03.8','97','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闍･譟ｳ" coords="130,362,137,369" href="../index.php?prec_no=33&block_no=0235&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0235','闍･譟ｳ','繝ｯ繧ｫ繝､繝翫ぐ','39','08.4','141','03.8','97','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="豎溷絢" coords="157,352,186,364" href="../index.php?prec_no=33&block_no=0236&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0236','豎溷絢','繧ｨ繧ｵ繧ｷ','39','11.0','141','09.7','42','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="豎溷絢" coords="149,351,156,358" href="../index.php?prec_no=33&block_no=0236&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0236','豎溷絢','繧ｨ繧ｵ繧ｷ','39','11.0','141','09.7','42','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ闊ｹ貂｡" coords="270,378,311,390" href="../index.php?prec_no=33&block_no=47512&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('s','47512','螟ｧ闊ｹ貂｡','繧ｪ繧ｪ繝輔リ繝�','39','03.8','141','42.8','36.9','1','1','1','1','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ闊ｹ貂｡" coords="258,379,269,390" href="../index.php?prec_no=33&block_no=47512&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('s','47512','螟ｧ闊ｹ貂｡','繧ｪ繧ｪ繝輔リ繝�','39','03.8','141','42.8','36.9','1','1','1','1','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荳髢｢" coords="150,411,179,423" href="../index.php?prec_no=33&block_no=0238&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0238','荳髢｢','繧､繝√ヮ繧ｻ繧ｭ','38','56.0','141','07.5','32','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荳髢｢" coords="142,414,149,421" href="../index.php?prec_no=33&block_no=0238&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0238','荳髢｢','繧､繝√ヮ繧ｻ繧ｭ','38','56.0','141','07.5','32','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蜊�蜴ｩ" coords="178,430,207,442" href="../index.php?prec_no=33&block_no=0239&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0239','蜊�蜴ｩ','繧ｻ繝ｳ繝槭Ζ','38','55.3','141','19.8','120','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蜊�蜴ｩ" coords="183,417,190,424" href="../index.php?prec_no=33&block_no=0239&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0239','蜊�蜴ｩ','繧ｻ繝ｳ繝槭Ζ','38','55.3','141','19.8','120','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螳､譬ｹ螻ｱ" coords="205,416,249,428" href="../index.php?prec_no=33&block_no=0240&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0240','螳､譬ｹ螻ｱ','繝�繝ｭ繝阪Ζ繝�','38','58.2','141','27.0','883','1','0','0','0','0','0','2005','10','18','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螳､譬ｹ螻ｱ" coords="207,404,214,411" href="../index.php?prec_no=33&block_no=0240&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','0240','螳､譬ｹ螻ｱ','繝�繝ｭ繝阪Ζ繝�','38','58.2','141','27.0','883','1','0','0','0','0','0','2005','10','18','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="逾ｭ逡､" coords="80,381,109,393" href="../index.php?prec_no=33&block_no=1028&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1028','逾ｭ逡､','繝槭ヤ繝ｫ繝�','39','00.7','140','51.9','350','1','0','0','0','1','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="逾ｭ逡､" coords="90,394,97,401" href="../index.php?prec_no=33&block_no=1028&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1028','逾ｭ逡､','繝槭ヤ繝ｫ繝�','39','00.7','140','51.9','350','1','0','0','0','1','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螂ｽ鞫ｩ" coords="153,188,182,200" href="../index.php?prec_no=33&block_no=1032&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1032','螂ｽ鞫ｩ','繧ｳ繧ｦ繝�','39','52.1','141','10.0','205','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螂ｽ鞫ｩ" coords="150,180,157,187" href="../index.php?prec_no=33&block_no=1032&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1032','螂ｽ鞫ｩ','繧ｳ繧ｦ繝�','39','52.1','141','10.0','205','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螻ｱ逕ｰ" coords="316,281,345,293" href="../index.php?prec_no=33&block_no=1033&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1033','螻ｱ逕ｰ','繝､繝槭ム','39','27.0','141','57.4','24','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螻ｱ逕ｰ" coords="308,284,315,291" href="../index.php?prec_no=33&block_no=1033&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1033','螻ｱ逕ｰ','繝､繝槭ム','39','27.0','141','57.4','24','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ驥�" coords="258,74,287,86" href="../index.php?prec_no=33&block_no=1037&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1037','螟ｧ驥�','繧ｪ繧ｪ繝�','40','16.9','141','40.0','200','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ驥�" coords="250,77,257,84" href="../index.php?prec_no=33&block_no=1037&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1037','螟ｧ驥�','繧ｪ繧ｪ繝�','40','16.9','141','40.0','200','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="陦｣蟾�" coords="134,381,163,393" href="../index.php?prec_no=33&block_no=1045&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1045','陦｣蟾�','繧ｳ繝ｭ繝｢繧ｬ繝ｯ','39','03.0','141','02.7','75','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="陦｣蟾�" coords="126,384,133,391" href="../index.php?prec_no=33&block_no=1045&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1045','陦｣蟾�','繧ｳ繝ｭ繝｢繧ｬ繝ｯ','39','03.0','141','02.7','75','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="阮ｮ蟾�" coords="191,204,220,216" href="../index.php?prec_no=33&block_no=1078&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1078','阮ｮ蟾�','繝､繝悶き繝ｯ','39','47.0','141','19.7','680','1','1','1','2','0','1','9999','99','99','2012蟷ｴ5譛�31譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪瑚略蟾昴�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="阮ｮ蟾�" coords="183,201,190,208" href="../index.php?prec_no=33&block_no=1078&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1078','阮ｮ蟾�','繝､繝悶き繝ｯ','39','47.0','141','19.7','680','1','1','1','2','0','1','9999','99','99','2012蟷ｴ5譛�31譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪瑚略蟾昴�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="邀ｳ驥�" coords="187,336,216,348" href="../index.php?prec_no=33&block_no=1113&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1113','邀ｳ驥�','繝ｨ繝阪し繝�','39','14.0','141','18.6','170','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="邀ｳ驥�" coords="179,339,186,346" href="../index.php?prec_no=33&block_no=1113&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1113','邀ｳ驥�','繝ｨ繝阪し繝�','39','14.0','141','18.6','170','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="豐｢蜀�" coords="77,247,106,259" href="../index.php?prec_no=33&block_no=1118&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1118','豐｢蜀�','繧ｵ繝ｯ繧ｦ繝�','39','32.9','140','50.6','407','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="豐｢蜀�" coords="86,260,93,267" href="../index.php?prec_no=33&block_no=1118&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1118','豐｢蜀�','繧ｵ繝ｯ繧ｦ繝�','39','32.9','140','50.6','407','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闕貞ｱ�" coords="104,108,133,120" href="../index.php?prec_no=33&block_no=1120&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1120','闕貞ｱ�','繧｢繝ｩ繝､','40','06.2','141','03.0','290','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闕貞ｱ�" coords="127,121,134,128" href="../index.php?prec_no=33&block_no=1120&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1120','闕貞ｱ�','繧｢繝ｩ繝､','40','06.2','141','03.0','290','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="譎ｮ莉｣" coords="302,143,331,155" href="../index.php?prec_no=33&block_no=1123&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1123','譎ｮ莉｣','繝輔ム繧､','40','00.2','141','53.0','8','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="譎ｮ莉｣" coords="294,146,301,153" href="../index.php?prec_no=33&block_no=1123&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1123','譎ｮ莉｣','繝輔ム繧､','40','00.2','141','53.0','8','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="邏ｫ豕｢" coords="150,256,179,268" href="../index.php?prec_no=33&block_no=1128&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1128','邏ｫ豕｢','繧ｷ繝ｯ','39','32.8','141','07.6','125','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="邏ｫ豕｢" coords="142,260,149,267" href="../index.php?prec_no=33&block_no=1128&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1128','邏ｫ豕｢','繧ｷ繝ｯ','39','32.8','141','07.6','125','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闡帶�ｹ逕ｰ" coords="63,196,104,208" href="../index.php?prec_no=33&block_no=1168&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1168','闡帶�ｹ逕ｰ','繧ｫ繝�繧ｳ繝ｳ繝','39','46.6','140','56.7','350','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="闡帶�ｹ逕ｰ" coords="106,203,113,210" href="../index.php?prec_no=33&block_no=1168&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1168','闡帶�ｹ逕ｰ','繧ｫ繝�繧ｳ繝ｳ繝','39','46.6','140','56.7','350','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="菴冗伐" coords="223,371,252,383" href="../index.php?prec_no=33&block_no=1206&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1206','菴冗伐','繧ｹ繝溘ち','39','08.5','141','34.4','80','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="菴冗伐" coords="232,362,239,369" href="../index.php?prec_no=33&block_no=1206&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1206','菴冗伐','繧ｹ繝溘ち','39','08.5','141','34.4','80','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟆乗悽" coords="316,184,345,196" href="../index.php?prec_no=33&block_no=1212&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1212','蟆乗悽','繧ｪ繝｢繝�','39','50.8','141','57.8','3','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟆乗悽" coords="310,185,317,192" href="../index.php?prec_no=33&block_no=1212&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1212','蟆乗悽','繧ｪ繝｢繝�','39','50.8','141','57.8','3','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螂･荳ｭ螻ｱ" coords="160,141,201,153" href="../index.php?prec_no=33&block_no=1215&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1215','螂･荳ｭ螻ｱ','繧ｪ繧ｯ繝翫き繝､繝�','40','03.6','141','13.5','430','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螂･荳ｭ螻ｱ" coords="162,132,169,139" href="../index.php?prec_no=33&block_no=1215&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1215','螂･荳ｭ螻ｱ','繧ｪ繧ｯ繝翫き繝､繝�','40','03.6','141','13.5','430','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螻ｱ蠖｢" coords="236,98,265,110" href="../index.php?prec_no=33&block_no=1219&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1219','螻ｱ蠖｢','繝､繝槭ぎ繧ｿ','40','08.9','141','34.3','290','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螻ｱ蠖｢" coords="231,110,238,117" href="../index.php?prec_no=33&block_no=1219&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1219','螻ｱ蠖｢','繝､繝槭ぎ繧ｿ','40','08.9','141','34.3','290','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟾昜ｺ�" coords="260,247,289,259" href="../index.php?prec_no=33&block_no=1224&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1224','蟾昜ｺ�','繧ｫ繝ｯ繧､','39','35.9','141','40.9','192','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蟾昜ｺ�" coords="253,247,260,254" href="../index.php?prec_no=33&block_no=1224&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1224','蟾昜ｺ�','繧ｫ繝ｯ繧､','39','35.9','141','40.9','192','1','1','1','2','0','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髢鬥ｬ" coords="212,243,243,255" href="../index.php?prec_no=33&block_no=1225&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1225','髢鬥ｬ','繧ｫ繝峨��','39','38.0','141','26.2','620','1','1','1','1','0','0','1993','10','07','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髢鬥ｬ" coords="204,239,211,246" href="../index.php?prec_no=33&block_no=1225&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1225','髢鬥ｬ','繧ｫ繝峨��','39','38.0','141','26.2','620','1','1','1','1','0','0','1993','10','07','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荳区虻骼�" coords="267,125,308,137" href="../index.php?prec_no=33&block_no=1332&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1332','荳区虻骼�','繧ｷ繝｢繝医け繧ｵ繝ｪ','40','05.1','141','42.7','232','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荳区虻骼�" coords="259,126,266,133" href="../index.php?prec_no=33&block_no=1332&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1332','荳区虻骼�','繧ｷ繝｢繝医け繧ｵ繝ｪ','40','05.1','141','42.7','232','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蛹ｺ逡�" coords="192,222,221,234" href="../index.php?prec_no=33&block_no=1447&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1447','蛹ｺ逡�','繧ｯ繧ｶ繧ｫ繧､','39','39.0','141','21.2','734','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蛹ｺ逡�" coords="188,234,195,241" href="../index.php?prec_no=33&block_no=1447&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1447','蛹ｺ逡�','繧ｯ繧ｶ繧ｫ繧､','39','39.0','141','21.2','734','1','1','1','2','1','1','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ讒�" coords="271,273,300,285" href="../index.php?prec_no=33&block_no=1508&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1508','螟ｧ讒�','繧ｪ繧ｪ繝�繝�','39','26.3','141','48.4','120','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ讒�" coords="278,287,285,294" href="../index.php?prec_no=33&block_no=1508&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1508','螟ｧ讒�','繧ｪ繧ｪ繝�繝�','39','26.3','141','48.4','120','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ譚ｱ" coords="184,384,213,396" href="../index.php?prec_no=33&block_no=1557&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1557','螟ｧ譚ｱ','繝繧､繝医え','39','02.3','141','17.8','140','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="螟ｧ譚ｱ" coords="176,387,183,394" href="../index.php?prec_no=33&block_no=1557&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1557','螟ｧ譚ｱ','繝繧､繝医え','39','02.3','141','17.8','140','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="驥代こ蟠�" coords="82,340,120,352" href="../index.php?prec_no=33&block_no=1558&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1558','驥代こ蟠�','繧ｫ繝阪ぎ繧ｵ繧ｭ','39','13.5','141','00.9','170','1','0','0','0','0','0','9999','99','99','2009蟷ｴ12譛�31譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪碁≡繝ｶ蟠弱�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="驥代こ蟠�" coords="120,341,127,348" href="../index.php?prec_no=33&block_no=1558&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1558','驥代こ蟠�','繧ｫ繝阪ぎ繧ｵ繧ｭ','39','13.5','141','00.9','170','1','0','0','0','0','0','9999','99','99','2009蟷ｴ12譛�31譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪碁≡繝ｶ蟠弱�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="貊晄ｲ｢" coords="144,203,173,215" href="../index.php?prec_no=33&block_no=1560&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1560','貊晄ｲ｢','繧ｿ繧ｭ繧ｶ繝ｯ','39','46.8','141','05.8','210','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="貊晄ｲ｢" coords="136,202,143,209" href="../index.php?prec_no=33&block_no=1560&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1560','貊晄ｲ｢','繧ｿ繧ｭ繧ｶ繝ｯ','39','46.8','141','05.8','210','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髯�鬥ｬ迚�" coords="226,285,267,297" href="../index.php?prec_no=33&block_no=1563&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1563','髯�鬥ｬ迚�','繝�繧ｭ繝｢繧ｦ繧ｷ','39','27.4','141','30.4','440','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髯�鬥ｬ迚�" coords="218,283,225,290" href="../index.php?prec_no=33&block_no=1563&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1563','髯�鬥ｬ迚�','繝�繧ｭ繝｢繧ｦ繧ｷ','39','27.4','141','30.4','440','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="遘狗伐逵�" coords="15,111,67,126" href="prefecture.php?prec_no=32&block_no=&year=&month=&day=&view=">
+<area shape="rect" alt="髱呈｣ｮ逵�" coords="139,36,191,51" href="prefecture.php?prec_no=31&block_no=&year=&month=&day=&view=">
+<area shape="rect" alt="螻ｱ蠖｢逵�" coords="4,462,56,477" href="prefecture.php?prec_no=35&block_no=&year=&month=&day=&view=">
+<area shape="rect" alt="螳ｮ蝓守恁" coords="99,466,151,481" href="prefecture.php?prec_no=34&block_no=&year=&month=&day=&view=">
+<area shape="rect" alt="蟯ｩ謇狗恁蜈ｨ蝨ｰ轤ｹ" coords="10,10,109,27" href="../index.php?prec_no=33&block_no=00&year=&month=&day=&view=">
+<area shape="rect" alt="蜴ｳ鄒�" coords="107,398,138,410" href="../index.php?prec_no=33&block_no=1598&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1598','蜴ｳ鄒�','繧ｲ繝ｳ繝�','38','59.0','140','54.7','230','1','0','0','0','0','0','2008','09','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蜴ｳ鄒�" coords="99,401,106,408" href="../index.php?prec_no=33&block_no=1598&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1598','蜴ｳ鄒�','繧ｲ繝ｳ繝�','38','59.0','140','54.7','230','1','0','0','0','0','0','2008','09','02','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蛻亥ｱ�" coords="280,234,311,246" href="../index.php?prec_no=33&block_no=1627&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1627','蛻亥ｱ�','繧ｫ繝ｪ繝､','39','38.5','141','46.4','140','1','0','0','0','0','0','2021','12','07','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="蛻亥ｱ�" coords="272,237,279,244" href="../index.php?prec_no=33&block_no=1627&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1627','蛻亥ｱ�','繧ｫ繝ｪ繝､','39','38.5','141','46.4','140','1','0','0','0','0','0','2021','12','07','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="譁ｰ逕ｺ" coords="307,305,338,317" href="../index.php?prec_no=33&block_no=1628&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1628','譁ｰ逕ｺ','繧ｷ繝ｳ繝√Ι繧ｦ','39','21.6','141','54.3','4','1','1','1','0','0','0','2021','12','07','2014蟷ｴ5譛�28譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪悟ｰ城字縲�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="譁ｰ逕ｺ" coords="298,307,305,314" href="../index.php?prec_no=33&block_no=1628&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1628','譁ｰ逕ｺ','繧ｷ繝ｳ繝√Ι繧ｦ','39','21.6','141','54.3','4','1','1','1','0','0','0','2021','12','07','2014蟷ｴ5譛�28譌･縺ｾ縺ｧ縺ｮ蝨ｰ轤ｹ蜷阪悟ｰ城字縲�','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髯ｸ蜑埼ｫ倡伐" coords="248,397,305,409" href="../index.php?prec_no=33&block_no=1629&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1629','髯ｸ蜑埼ｫ倡伐','繝ｪ繧ｯ繧ｼ繝ｳ繧ｿ繧ｫ繧ｿ','39','01.5','141','37.8','61','1','1','1','0','0','0','2021','12','07','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="髯ｸ蜑埼ｫ倡伐" coords="243,391,250,398" href="../index.php?prec_no=33&block_no=1629&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1629','髯ｸ蜑埼ｫ倡伐','繝ｪ繧ｯ繧ｼ繝ｳ繧ｿ繧ｫ繧ｿ','39','01.5','141','37.8','61','1','1','1','0','0','0','2021','12','07','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荳譁ｹ莠�" coords="155,162,196,174" href="../index.php?prec_no=33&block_no=1653&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1653','荳譁ｹ莠�','繧､繝�繧ｫ繧ｿ繧､','39','58.4','141','10.0','285','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+<area shape="rect" alt="荳譁ｹ莠�" coords="150,154,157,161" href="../index.php?prec_no=33&block_no=1653&year=&month=&day=&view=" 
+onmouseover="javascript:viewPoint('a','1653','荳譁ｹ莠�','繧､繝�繧ｫ繧ｿ繧､','39','58.4','141','10.0','285','1','0','0','0','0','0','9999','99','99','','','','','');" onmouseout="javascript:initPoint();">
+</map>
+<br><ul class="pagelink mtx"><li><A href="../../data/mdrr/man/first.html">蛻ｩ逕ｨ縺輔ｌ繧区婿縺ｸ</A></li></ul><br>
+<!-- //contents -->
+
+<p class="totop"><a href="#nheader">縺薙�ｮ繝壹�ｼ繧ｸ縺ｮ繝医ャ繝励∈</a></p>
+</div>
+</div>
+
+<div id="footer_area"><div id="nfooter"><ul><li><a href="//www.jma.go.jp/jma/kishou/info/coment.html">豌苓ｱ｡蠎√�帙�ｼ繝�繝壹�ｼ繧ｸ縺ｫ縺､縺�縺ｦ</a></li></ul></div></div></body>
+</html>
