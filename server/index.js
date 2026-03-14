@@ -12,6 +12,9 @@ import damHistoryRouter from './routes/dam-history.js';
 
 const app = express();
 
+// プロキシを通してデプロイされる環境（Render等）でIPを正しく取得するための設定
+app.set('trust proxy', 1);
+
 // セキュリティヘッダー
 app.use(helmet({
     contentSecurityPolicy: {
