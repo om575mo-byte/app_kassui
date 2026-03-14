@@ -330,7 +330,7 @@ export function showDamDetail(dam) {
         <span style="font-size: 1rem;">🤖</span>
         AI渇水予測 (Machine Learning)
       </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; font-size: 0.85rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; font-size: 0.8rem;">
         <div>
           <div style="color: var(--text-muted); font-size: 0.75rem;">7日後の予想</div>
           <div style="margin-top: 2px;">危険度: <strong>${dam.aiPrediction['7d'].level.toUpperCase()}</strong></div>
@@ -343,12 +343,12 @@ export function showDamDetail(dam) {
           <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">水位: ${dam.aiPrediction['28d'].mean}m (±${dam.aiPrediction['28d'].std}m)</div>
           ${formatReason(dam.aiPrediction['28d'].reasons)}
         </div>
-        ${dam.aiPrediction['90d'] ? `
+        ${dam.aiPrediction['60d'] ? `
         <div>
           <div style="color: var(--text-muted); font-size: 0.75rem;">60日後の予想</div>
-          <div style="margin-top: 2px;">危険度: <strong>${dam.aiPrediction['60d'] ? dam.aiPrediction['60d'].level.toUpperCase() : '—'}</strong></div>
-          <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">水位: ${dam.aiPrediction['60d'] ? dam.aiPrediction['60d'].mean + 'm (±' + dam.aiPrediction['60d'].std + 'm)' : '—'}</div>
-          ${dam.aiPrediction['60d'] ? formatReason(dam.aiPrediction['60d'].reasons) : ''}
+          <div style="margin-top: 2px;">危険度: <strong>${dam.aiPrediction['60d'].level.toUpperCase()}</strong></div>
+          <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">水位: ${dam.aiPrediction['60d'].mean}m (±${dam.aiPrediction['60d'].std}m)</div>
+          ${formatReason(dam.aiPrediction['60d'].reasons)}
         </div>
         ` : ''}
       </div>
