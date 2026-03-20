@@ -25,8 +25,11 @@ app.use(helmet({
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             imgSrc: ["'self'", "data:", "https://*.tile.openstreetmap.org", "https://*.basemaps.cartocdn.com", "https://server.arcgisonline.com", "https://www.jma.go.jp"],
             connectSrc: ["'self'"],
+            frameAncestors: ["'self'", process.env.ALLOWED_FRAME_ANCESTORS || "https://sites.google.com/view/kawabibouroku/"],
         },
     },
+    crossOriginEmbedderPolicy: false,
+    xFrameOptions: false,
 }));
 
 // レートリミット（15分あたり100リクエスト）
