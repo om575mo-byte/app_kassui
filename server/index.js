@@ -25,7 +25,7 @@ app.use(helmet({
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             imgSrc: ["'self'", "data:", "https://*.tile.openstreetmap.org", "https://*.basemaps.cartocdn.com", "https://server.arcgisonline.com", "https://www.jma.go.jp"],
             connectSrc: ["'self'"],
-            frameAncestors: ["'self'", process.env.ALLOWED_FRAME_ANCESTORS || "https://sites.google.com"],
+            frameAncestors: ["'self'", "https://sites.google.com", "https://*.googleusercontent.com", ...(process.env.ALLOWED_FRAME_ANCESTORS ? process.env.ALLOWED_FRAME_ANCESTORS.split(',') : [])],
         },
     },
     crossOriginEmbedderPolicy: false,
